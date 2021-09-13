@@ -1,0 +1,36 @@
+# graphique de visualisation
+```{r importation des librairies,message=FALSE,warning=FALSE,echo=FALSE}
+library(tidyverse)
+library(readxl)
+library(lubridate)
+library(GGally)
+library(ggthemes)
+library(khroma)
+library(ggh4x)
+```
+
+```{r base de données}
+bd <- read_excel("Inputs/bd.xlsx",sheet = "bd")
+bd <- bd %>% mutate(date=ymd(date))
+```
+
+## Graphe
+
+```{r}
+bd %>% ggplot()+
+  aes(x=date,y=consommation,colour=tranche_age)+
+  scale_color_bright()+
+  geom_line()+
+  scale_x_date(
+    date_labels = "%b\n%Y",
+    date_breaks = "6 months",
+    date_minor_breaks = "1 month",
+    guide = guide_axis_minor()
+  )+
+  labs(x="",y="")+
+  theme_clean()+
+  theme(
+    legend.position = "bottom"
+  )
+```
+
