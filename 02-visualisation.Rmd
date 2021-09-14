@@ -4,10 +4,16 @@ library(tidyverse)
 library(readxl)
 library(lubridate)
 library(GGally)
+library(trend)
 library(ggthemes)
 library(khroma)
 library(ggh4x)
 library(snht)
+library(xts)
+library(changepoint)
+library(strucchange)
+library(bcp)
+library(segmented)
 ```
 
 ```{r base de données,message=FALSE,warning=FALSE,echo=FALSE}
@@ -35,14 +41,50 @@ bd_evol <- bd %>% group_by(date) %>% summarise(consommation=sum(consommation)) %
     legend.position = "bottom"
   )
 ```
-On peut facilement isoler ici deux périodes ,celle d'avant février 2016 et celle d'après où les tendances sont respectivement à la hausse puis à la baisse . 
+On peut facilement isoler ici deux périodes ,celle d'avant janvier 2016 et celle d'après où les tendances sont respectivement à la hausse puis à la baisse . 
 Nous devons le confirmer par un test d'éxogénéité (en l'occurence de test snht)
-## Test d'exogénéité pour la détection des valeurs de changement structurel
+## Test de Pettit et de CUSUM d'exogénéité pour la détection des valeurs de changement structurel
 
 ```{r,message=FALSE,warning=FALSE,echo=FALSE}
-snht(bd_evol$consommation,period = 12,robust = T)
+bd_evol <- bd_evol %>% tsibble::as_tsibble() %>% mutate(date=ymd(date))
+cons <- xts(bd_evol$consommation,order.by = bd_evol$date)
+# cpt2 <- cpt.mean(bd_evol$consommation,method = "PELT",penalty = "CROPS",pen.value = c(1,25))
+# summary(cpt2)
+# plot(cpt2,diagnostic=T)
+ocus <- efp(cons~1,type = "OLS-CUSUM")
+sctest(ocus)
+cpt <- cpt.mean(bd_evol$consommation,method = "AMOC")
+cpt 
+fs_ev <- Fstats(bd_evol$consommation~1)
+plot(fs_ev)
+plot(ocus)
 ```
 
+
+```{r}
+brp_cons <- breakpoints(cons~1)
+brp_cons
+pettitt.test(bd_evol$consommation)
+```
+
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
+bd_evol <- bd %>% group_by(date) %>% summarise(consommation=sum(consommation)) %>% ungroup() 
+  bd_evol %>% ggplot()+
+  aes(x=date,y=consommation)+
+  geom_line(color="firebrick")+
+    geom_vline(xintercept =as.numeric(bd_evol$consommation[18]))+
+  scale_x_date(
+    date_labels = "%b\n%Y",
+    date_breaks = "4 months",
+    date_minor_breaks = "1 month",
+    guide = guide_axis_minor()
+  )+
+  labs(x="",y="",title = "Evolution de la Consommation des anti-paludéens\n")+
+  theme_clean()+
+  theme(
+    legend.position = "bottom"
+  )
+```
 ## Consommation des antipaludéens par tranche d'âge
 
 ```{r,message=FALSE,warning=FALSE,echo=FALSE}
