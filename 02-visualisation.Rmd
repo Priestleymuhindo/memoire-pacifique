@@ -10,7 +10,7 @@ library(ggh4x)
 library(snht)
 ```
 
-```{r base de données,echo=FALSE,message=FALSE,warning=FALSE}
+```{r base de données,message=FALSE,warning=FALSE,echo=FALSE}
 bd <- read_excel("Inputs/bd.xlsx",sheet = "bd")
 bd <- bd %>% mutate(date=ymd(date))
 ```
@@ -18,7 +18,7 @@ bd <- bd %>% mutate(date=ymd(date))
 
 ## Evolution de la  Consommation des antipaludéens 
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
 bd_evol <- bd %>% group_by(date) %>% summarise(consommation=sum(consommation)) %>% ungroup() 
   bd_evol %>% ggplot()+
   aes(x=date,y=consommation)+
@@ -39,13 +39,13 @@ On peut facilement isoler ici deux périodes ,celle d'avant février 2016 et cel
 Nous devons le confirmer par un test d'éxogénéité (en l'occurence de test snht)
 ## Test d'exogénéité pour la détection des valeurs de changement structurel
 
-```{r}
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
 snht(bd_evol$consommation,period = 12,robust = T)
 ```
 
 ## Consommation des antipaludéens par tranche d'âge
 
-```{r,echo=FALSE,message=FALSE,warning=FALSE}
+```{r,message=FALSE,warning=FALSE,echo=FALSE}
 bd %>% ggplot()+
   aes(x=date,y=consommation,colour=tranche_age)+
   scale_color_bright()+
