@@ -10,7 +10,7 @@ library(ggh4x)
 library(snht)
 ```
 
-```{r base de données}
+```{r base de données,echo=FALSE,message=FALSE,warning=FALSE}
 bd <- read_excel("Inputs/bd.xlsx",sheet = "bd")
 bd <- bd %>% mutate(date=ymd(date))
 ```
@@ -18,7 +18,7 @@ bd <- bd %>% mutate(date=ymd(date))
 
 ## Evolution de la  Consommation des antipaludéens 
 
-```{r}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 bd_evol <- bd %>% group_by(date) %>% summarise(consommation=sum(consommation)) %>% ungroup() 
   bd_evol %>% ggplot()+
   aes(x=date,y=consommation)+
@@ -45,14 +45,14 @@ snht(bd_evol$consommation,period = 12,robust = T)
 
 ## Consommation des antipaludéens par tranche d'âge
 
-```{r}
+```{r,echo=FALSE,message=FALSE,warning=FALSE}
 bd %>% ggplot()+
   aes(x=date,y=consommation,colour=tranche_age)+
   scale_color_bright()+
   geom_line()+
   scale_x_date(
     date_labels = "%b\n%Y",
-    date_breaks = "6 months",
+    date_breaks = "4 months",
     date_minor_breaks = "6 month",
     guide = guide_axis_minor()
   )+
