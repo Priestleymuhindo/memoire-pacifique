@@ -5,9 +5,6 @@ date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
 
-# Visualisation de la série des données
-A ce stade d'analyse ,nous allons ,au moyen d'un graphique ,la tendance de notre série des consommations des anti-paludéens par tranche d'âge
-
 
 
 
