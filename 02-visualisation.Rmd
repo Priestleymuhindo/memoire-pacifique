@@ -7,6 +7,7 @@ library(GGally)
 library(ggthemes)
 library(khroma)
 library(ggh4x)
+library(snht)
 ```
 
 ```{r base de données}
@@ -14,7 +15,35 @@ bd <- read_excel("Inputs/bd.xlsx",sheet = "bd")
 bd <- bd %>% mutate(date=ymd(date))
 ```
 
-## Graphe
+
+## Evolution de la  Consommation des antipaludéens 
+
+```{r}
+bd_evol <- bd %>% group_by(date) %>% summarise(consommation=sum(consommation)) %>% ungroup() 
+  bd_evol %>% ggplot()+
+  aes(x=date,y=consommation)+
+  geom_line(color="firebrick")+
+  scale_x_date(
+    date_labels = "%b\n%Y",
+    date_breaks = "4 months",
+    date_minor_breaks = "1 month",
+    guide = guide_axis_minor()
+  )+
+  labs(x="",y="",title = "Evolution de la Consommation des anti-paludéens\n")+
+  theme_clean()+
+  theme(
+    legend.position = "bottom"
+  )
+```
+On peut facilement isoler ici deux périodes ,celle d'avant février 2016 et celle d'après où les tendances sont respectivement à la hausse puis à la baisse . 
+Nous devons le confirmer par un test d'éxogénéité (en l'occurence de test snht)
+## Test d'exogénéité pour la détection des valeurs de changement structurel
+
+```{r}
+snht(bd_evol$consommation,period = 12,robust = T)
+```
+
+## Consommation des antipaludéens par tranche d'âge
 
 ```{r}
 bd %>% ggplot()+
@@ -24,10 +53,11 @@ bd %>% ggplot()+
   scale_x_date(
     date_labels = "%b\n%Y",
     date_breaks = "6 months",
-    date_minor_breaks = "1 month",
+    date_minor_breaks = "6 month",
     guide = guide_axis_minor()
   )+
-  labs(x="",y="")+
+  labs(x="",y="",title = "Evolution de la Consommation des anti-paludéens\n par tranche d'âge")+
+  guides(color=guide_legend(title="tranche d'âge"))+
   theme_clean()+
   theme(
     legend.position = "bottom"
