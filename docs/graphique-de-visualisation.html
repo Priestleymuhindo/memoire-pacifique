@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>MEMOIRE DE PACIFIQUE</title>
-  <meta name="description" content="MEMOIRE DE PACIFIQUE" />
+  <title>Chapter 2 graphique de visualisation | MEMOIRE DE PACIFIQUE</title>
+  <meta name="description" content="Chapter 2 graphique de visualisation | MEMOIRE DE PACIFIQUE" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="MEMOIRE DE PACIFIQUE" />
+  <meta property="og:title" content="Chapter 2 graphique de visualisation | MEMOIRE DE PACIFIQUE" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="MEMOIRE DE PACIFIQUE" />
+  <meta name="twitter:title" content="Chapter 2 graphique de visualisation | MEMOIRE DE PACIFIQUE" />
   
   
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-
+<link rel="prev" href="index.html"/>
 <link rel="next" href="a-caucus-race-and-a-long-tale.html"/>
 <script src="libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -137,12 +137,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Mémoire de licence Pacifique</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="graphique-de-visualisation.html"><a href="graphique-de-visualisation.html"><i class="fa fa-check"></i><b>1</b> graphique de visualisation</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> STATISTIQUE DESCRIPTIVE</a></li>
+<li class="chapter" data-level="2" data-path="graphique-de-visualisation.html"><a href="graphique-de-visualisation.html"><i class="fa fa-check"></i><b>2</b> graphique de visualisation</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="graphique-de-visualisation.html"><a href="graphique-de-visualisation.html#evolution-de-la-consommation-des-antipaludéens"><i class="fa fa-check"></i><b>1.1</b> Evolution de la Consommation des antipaludéens</a></li>
-<li class="chapter" data-level="1.2" data-path="graphique-de-visualisation.html"><a href="graphique-de-visualisation.html#consommation-des-antipaludéens-par-tranche-dâge"><i class="fa fa-check"></i><b>1.2</b> Consommation des antipaludéens par tranche d’âge</a></li>
+<li class="chapter" data-level="2.1" data-path="graphique-de-visualisation.html"><a href="graphique-de-visualisation.html#evolution-de-la-consommation-des-antipaludéens"><i class="fa fa-check"></i><b>2.1</b> Evolution de la Consommation des antipaludéens</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>2</b> A caucus-race and a long tale</a></li>
+<li class="chapter" data-level="3" data-path="a-caucus-race-and-a-long-tale.html"><a href="a-caucus-race-and-a-long-tale.html"><i class="fa fa-check"></i><b>3</b> A caucus-race and a long tale</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -162,118 +162,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">MEMOIRE DE PACIFIQUE</h1>
-<p class="author"><em>Priestley</em></p>
-<p class="date"><em>2021-09-14</em></p>
-</div>
-<div id="graphique-de-visualisation" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> graphique de visualisation</h1>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="graphique-de-visualisation.html#cb1-1" aria-hidden="true" tabindex="-1"></a>bd <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">&quot;Inputs/bd.xlsx&quot;</span>,<span class="at">sheet =</span> <span class="st">&quot;bd&quot;</span>)</span>
-<span id="cb1-2"><a href="graphique-de-visualisation.html#cb1-2" aria-hidden="true" tabindex="-1"></a>bd <span class="ot">&lt;-</span> bd <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="at">date=</span><span class="fu">ymd</span>(date))</span></code></pre></div>
-<div id="evolution-de-la-consommation-des-antipaludéens" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Evolution de la Consommation des antipaludéens</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="graphique-de-visualisation.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bd_evol <span class="ot">&lt;-</span> bd <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(date) <span class="sc">%&gt;%</span> <span class="fu">summarise</span>(<span class="at">consommation=</span><span class="fu">sum</span>(consommation)) <span class="sc">%&gt;%</span> <span class="fu">ungroup</span>() </span>
-<span id="cb2-2"><a href="graphique-de-visualisation.html#cb2-2" aria-hidden="true" tabindex="-1"></a>  bd_evol <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb2-3"><a href="graphique-de-visualisation.html#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>date,<span class="at">y=</span>consommation)<span class="sc">+</span></span>
-<span id="cb2-4"><a href="graphique-de-visualisation.html#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color=</span><span class="st">&quot;firebrick&quot;</span>)<span class="sc">+</span></span>
-<span id="cb2-5"><a href="graphique-de-visualisation.html#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(</span>
-<span id="cb2-6"><a href="graphique-de-visualisation.html#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_labels =</span> <span class="st">&quot;%b</span><span class="sc">\n</span><span class="st">%Y&quot;</span>,</span>
-<span id="cb2-7"><a href="graphique-de-visualisation.html#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_breaks =</span> <span class="st">&quot;4 months&quot;</span>,</span>
-<span id="cb2-8"><a href="graphique-de-visualisation.html#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_minor_breaks =</span> <span class="st">&quot;1 month&quot;</span>,</span>
-<span id="cb2-9"><a href="graphique-de-visualisation.html#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="fu">guide_axis_minor</span>()</span>
-<span id="cb2-10"><a href="graphique-de-visualisation.html#cb2-10" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
-<span id="cb2-11"><a href="graphique-de-visualisation.html#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>,<span class="at">y=</span><span class="st">&quot;&quot;</span>,<span class="at">title =</span> <span class="st">&quot;Evolution de la Consommation des anti-paludéens</span><span class="sc">\n</span><span class="st">&quot;</span>)<span class="sc">+</span></span>
-<span id="cb2-12"><a href="graphique-de-visualisation.html#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()<span class="sc">+</span></span>
-<span id="cb2-13"><a href="graphique-de-visualisation.html#cb2-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb2-14"><a href="graphique-de-visualisation.html#cb2-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span></span>
-<span id="cb2-15"><a href="graphique-de-visualisation.html#cb2-15" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-6-1.png" width="672" />
-On peut facilement isoler ici deux périodes ,celle d’avant février 2016 et celle d’après où les tendances sont respectivement à la hausse puis à la baisse .
+<div id="graphique-de-visualisation" class="section level1" number="2">
+<h1><span class="header-section-number">Chapter 2</span> graphique de visualisation</h1>
+<div id="evolution-de-la-consommation-des-antipaludéens" class="section level2" number="2.1">
+<h2><span class="header-section-number">2.1</span> Evolution de la Consommation des antipaludéens</h2>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+On peut facilement isoler ici deux périodes ,celle d’avant janvier 2016 et celle d’après où les tendances sont respectivement à la hausse puis à la baisse .
 Nous devons le confirmer par un test d’éxogénéité (en l’occurence de test snht)
-## Test d’exogénéité pour la détection des valeurs de changement structurel</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="graphique-de-visualisation.html#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">snht</span>(bd_evol<span class="sc">$</span>consommation,<span class="at">period =</span> <span class="dv">12</span>,<span class="at">robust =</span> T)</span></code></pre></div>
-<pre><code>##           score  leftMean rightMean
-## 1            NA        NA        NA
-## 2            NA        NA        NA
-## 3            NA        NA        NA
-## 4            NA        NA        NA
-## 5            NA        NA        NA
-## 6            NA        NA        NA
-## 7            NA        NA        NA
-## 8            NA        NA        NA
-## 9            NA        NA        NA
-## 10           NA        NA        NA
-## 11           NA        NA        NA
-## 12           NA        NA        NA
-## 13  6.045446701  9221.872  7060.491
-## 14  7.039182553  9688.542  6872.492
-## 15 10.926357133 10565.167  6426.340
-## 16 22.610992098 10636.255  6072.052
-## 17 22.800629614 10655.355  6072.052
-## 18 21.578995957 10524.198  6072.052
-## 19 32.204563395  9728.744  6028.126
-## 20 19.808277418  9399.560  6166.169
-## 21 10.053625341  9402.921  6317.500
-## 22  7.536532333  9323.554  6478.917
-## 23  4.418694799  9274.590  6579.917
-## 24  2.811802103  8330.891  6703.502
-## 25  1.705861008  7637.072  6640.198
-## 26  1.326743986  7060.491  6433.047
-## 27  0.624066022  6872.492  6442.167
-## 28  0.077073570  6426.340  6560.485
-## 29  1.590036675  6072.052  6543.185
-## 30  1.571864365  6072.052  6540.485
-## 31  1.116476067  6072.052  6492.917
-## 32  0.759484865  6028.126  6426.250
-## 33  0.013732602  6166.169  6229.750
-## 34  0.324503447  6317.500  6031.667
-## 35  1.856524848  6478.917  5858.566
-## 36  4.556613897  6579.917  5694.996
-## 37  6.876311730  6703.502  5692.096
-## 38  5.621814627  6640.198  5685.242
-## 39  4.380502143  6433.047  5670.800
-## 40  8.558277825  6442.167  5461.872
-## 41 13.266888902  6560.485  5448.300
-## 42 12.857368146  6543.185  5448.300
-## 43  8.103328095  6540.485  5570.605
-## 44  2.698543612  6492.917  5796.338
-## 45  1.114248519  6426.250  5926.431
-## 46  0.357458586  6229.750  5933.343
-## 47  0.055044594  6031.667  5932.700
-## 48  0.001933564  5858.566  5874.827
-## 49           NA        NA        NA
-## 50           NA        NA        NA
-## 51           NA        NA        NA
-## 52           NA        NA        NA
-## 53           NA        NA        NA
-## 54           NA        NA        NA
-## 55           NA        NA        NA
-## 56           NA        NA        NA
-## 57           NA        NA        NA
-## 58           NA        NA        NA
-## 59           NA        NA        NA
-## 60           NA        NA        NA</code></pre>
-</div>
-<div id="consommation-des-antipaludéens-par-tranche-dâge" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Consommation des antipaludéens par tranche d’âge</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="graphique-de-visualisation.html#cb5-1" aria-hidden="true" tabindex="-1"></a>bd <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>()<span class="sc">+</span></span>
-<span id="cb5-2"><a href="graphique-de-visualisation.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x=</span>date,<span class="at">y=</span>consommation,<span class="at">colour=</span>tranche_age)<span class="sc">+</span></span>
-<span id="cb5-3"><a href="graphique-de-visualisation.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_bright</span>()<span class="sc">+</span></span>
-<span id="cb5-4"><a href="graphique-de-visualisation.html#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()<span class="sc">+</span></span>
-<span id="cb5-5"><a href="graphique-de-visualisation.html#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(</span>
-<span id="cb5-6"><a href="graphique-de-visualisation.html#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_labels =</span> <span class="st">&quot;%b</span><span class="sc">\n</span><span class="st">%Y&quot;</span>,</span>
-<span id="cb5-7"><a href="graphique-de-visualisation.html#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_breaks =</span> <span class="st">&quot;6 months&quot;</span>,</span>
-<span id="cb5-8"><a href="graphique-de-visualisation.html#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">date_minor_breaks =</span> <span class="st">&quot;6 month&quot;</span>,</span>
-<span id="cb5-9"><a href="graphique-de-visualisation.html#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">guide =</span> <span class="fu">guide_axis_minor</span>()</span>
-<span id="cb5-10"><a href="graphique-de-visualisation.html#cb5-10" aria-hidden="true" tabindex="-1"></a>  )<span class="sc">+</span></span>
-<span id="cb5-11"><a href="graphique-de-visualisation.html#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x=</span><span class="st">&quot;&quot;</span>,<span class="at">y=</span><span class="st">&quot;&quot;</span>,<span class="at">title =</span> <span class="st">&quot;Evolution de la Consommation des anti-paludéens</span><span class="sc">\n</span><span class="st"> par tranche d&#39;âge&quot;</span>)<span class="sc">+</span></span>
-<span id="cb5-12"><a href="graphique-de-visualisation.html#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">color=</span><span class="fu">guide_legend</span>(<span class="at">title=</span><span class="st">&quot;tranche d&#39;âge&quot;</span>))<span class="sc">+</span></span>
-<span id="cb5-13"><a href="graphique-de-visualisation.html#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_clean</span>()<span class="sc">+</span></span>
-<span id="cb5-14"><a href="graphique-de-visualisation.html#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
-<span id="cb5-15"><a href="graphique-de-visualisation.html#cb5-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span></span>
-<span id="cb5-16"><a href="graphique-de-visualisation.html#cb5-16" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
-<p><img src="bookdownproj_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+## Test de Pettit et de CUSUM d’exogénéité pour la détection des valeurs de changement structurel</p>
+<pre><code>## 
+##  OLS-based CUSUM test
+## 
+## data:  ocus
+## S0 = 2.4662, p-value = 1.042e-05</code></pre>
+<pre><code>## Class &#39;cpt&#39; : Changepoint Object
+##        ~~   : S4 class containing 12 slots with names
+##               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
+## 
+## Created on  : Fri Sep 03 15:14:26 2021 
+## 
+## summary(.)  :
+## ----------
+## Created Using changepoint version 2.2.2 
+## Changepoint type      : Change in mean 
+## Method of analysis    : AMOC 
+## Test Statistic  : Normal 
+## Type of penalty       : MBIC with value, 12.28303 
+## Minimum Segment Length : 1 
+## Maximum no. of cpts   : 1 
+## Changepoint Locations : 18</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-2-1.png" width="672" /><img src="bookdownproj_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="graphique-de-visualisation.html#cb3-1" aria-hidden="true" tabindex="-1"></a>brp_cons <span class="ot">&lt;-</span> <span class="fu">breakpoints</span>(cons<span class="sc">~</span><span class="dv">1</span>)</span>
+<span id="cb3-2"><a href="graphique-de-visualisation.html#cb3-2" aria-hidden="true" tabindex="-1"></a>brp_cons</span></code></pre></div>
+<pre><code>## 
+##   Optimal 2-segment partition: 
+## 
+## Call:
+## breakpoints.formula(formula = cons ~ 1)
+## 
+## Breakpoints at observation number:
+## 18 
+## 
+## Corresponding to breakdates:
+## 0.3</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="graphique-de-visualisation.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pettitt.test</span>(bd_evol<span class="sc">$</span>consommation)</span></code></pre></div>
+<pre><code>## 
+##  Pettitt&#39;s test for single change-point detection
+## 
+## data:  bd_evol$consommation
+## U* = 660, p-value = 1.356e-05
+## alternative hypothesis: two.sided
+## sample estimates:
+## probable change point at time K 
+##                              18</code></pre>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+## Consommation des antipaludéens par tranche d’âge</p>
+<p><img src="bookdownproj_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 
 </div>
 </div>
@@ -282,8 +226,8 @@ Nous devons le confirmer par un test d’éxogénéité (en l’occurence de tes
           </div>
         </div>
       </div>
-
-<a href="a-caucus-race-and-a-long-tale.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-caucus-race-and-a-long-tale.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
