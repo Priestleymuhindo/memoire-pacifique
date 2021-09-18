@@ -5,7 +5,8 @@ library(readxl)
 library(lubridate)
 library(GGally)
 library(trend)
-library(tse)
+library(gridExtra)
+library(tseries)
 library(ggthemes)
 library(khroma)
 library(forecast)
@@ -250,8 +251,8 @@ adf.test(consommation_totale_b_d)
 
 
 ```{r}
-m <- dygraph(consommation_totale_b_d, main = "Allure de la courbe par la transformation de Box Cox")%>%
-dySeries("V1", stepPlot = FALSE, fillGraph = TRUE, color = "red") 
+m <- dygraph(consommation_totale_b_d, main = "Allure de la différence première de la série")%>%
+dySeries("V1", stepPlot = FALSE, fillGraph = FALSE, color = "green") 
 htmlwidgets::saveWidget(m, "temp.html", selfcontained = FALSE)
 width<- 1080
 height <- 610
@@ -259,4 +260,45 @@ webshot("temp.html", file = "diff.png",
         cliprect = c(10,30,width+50,height+50)
         ,vwidth = width, vheight = height )
 m
+```
+
+
+```{r}
+Acf(consommation_totale_b_d,
+    main = "Fonction d'autocorrelation"
+    )
+```
+## Fonction d'autocorrélation et d'autocorelation Partielle
+```{r}
+p <- ggAcf(consommation_totale_b_d)+ggtitle("Fonction d'Autocorrélation")+theme_clean()
+q <- ggPacf(consommation_totale_b_d)+ggtitle("Fonction d'Autocorrélation\n Partielle")+theme_clean()
+k <- grid.arrange(p,q,ncol=2)
+ggsave(filename = "fonction_auto.png",plot = k,width = 16,height = 12,units = "cm")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
